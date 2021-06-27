@@ -1,0 +1,10 @@
+C:\Users\richa\source\repos\FileMates\FileMates\bin\Debug\FileMates.exe.config
+C:\Users\richa\source\repos\FileMates\FileMates\bin\Debug\FileMates.exe
+C:\Users\richa\source\repos\FileMates\FileMates\bin\Debug\FileMates.pdb
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.csprojAssemblyReference.cache
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.Form1.resources
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.Properties.Resources.resources
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.csproj.GenerateResource.cache
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.csproj.CoreCompileInputs.cache
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.exe
+C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.pdb
