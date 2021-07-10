@@ -30,7 +30,7 @@ namespace FileMates
         private void InitializeComponent()
         {
             this.originalFolderDlg = new System.Windows.Forms.FolderBrowserDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRun = new System.Windows.Forms.Button();
             this.destinationFolderDlg = new System.Windows.Forms.FolderBrowserDialog();
             this.initialFilesDlg = new System.Windows.Forms.OpenFileDialog();
             this.searchFolderDlg = new System.Windows.Forms.FolderBrowserDialog();
@@ -43,16 +43,18 @@ namespace FileMates
             this.lblogFldPath = new System.Windows.Forms.Label();
             this.lblsrchFldPath = new System.Windows.Forms.Label();
             this.lbldsFldPath = new System.Windows.Forms.Label();
+            this.btnF1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnRun
             // 
-            this.button1.Location = new System.Drawing.Point(607, 512);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Run";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRun.Location = new System.Drawing.Point(607, 512);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(75, 23);
+            this.btnRun.TabIndex = 0;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // initialFilesDlg
             // 
@@ -142,11 +144,22 @@ namespace FileMates
             this.lbldsFldPath.TabIndex = 5;
             this.lbldsFldPath.Text = "path";
             // 
+            // btnF1
+            // 
+            this.btnF1.Location = new System.Drawing.Point(568, 190);
+            this.btnF1.Name = "btnF1";
+            this.btnF1.Size = new System.Drawing.Size(75, 23);
+            this.btnF1.TabIndex = 6;
+            this.btnF1.Text = "F1";
+            this.btnF1.UseVisualStyleBackColor = true;
+            this.btnF1.Click += new System.EventHandler(this.btnF1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 547);
+            this.Controls.Add(this.btnF1);
             this.Controls.Add(this.lbldsFldPath);
             this.Controls.Add(this.lblsrchFldPath);
             this.Controls.Add(this.lblogFldPath);
@@ -156,7 +169,7 @@ namespace FileMates
             this.Controls.Add(this.FldFindSearchBtn);
             this.Controls.Add(this.FldFindDestinationBtn);
             this.Controls.Add(this.FldFindOriginalBtn);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnRun);
             this.Name = "Form1";
             this.Text = "FileMates";
             this.ResumeLayout(false);
@@ -167,7 +180,7 @@ namespace FileMates
         #endregion
 
         private System.Windows.Forms.FolderBrowserDialog originalFolderDlg;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.FolderBrowserDialog destinationFolderDlg;
         private System.Windows.Forms.OpenFileDialog initialFilesDlg;
         private System.Windows.Forms.FolderBrowserDialog searchFolderDlg;
@@ -180,6 +193,7 @@ namespace FileMates
         private System.Windows.Forms.Label lblogFldPath;
         private System.Windows.Forms.Label lblsrchFldPath;
         private System.Windows.Forms.Label lbldsFldPath;
+        private System.Windows.Forms.Button btnF1;
     }
 }
 

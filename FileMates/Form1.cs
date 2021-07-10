@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace FileMates
 {
     public partial class Form1 : Form
     {
-        enum e_exportMode
+        private enum e_exportMode
         {
             move = 0,
             copy = 1
         }
-        e_exportMode exportMode = e_exportMode.move;
+
+        private e_exportMode exportMode = e_exportMode.move;
+        private Globals global = new Globals();
 
         public Form1()
         {
@@ -26,34 +30,199 @@ namespace FileMates
             // Select mutliple files with File Dialog: https://stackoverflow.com/a/12909759
             InitializeComponent();
 
-        
+            /* ! DEVELOPMENT SHORTCUTS
+             * ------ */
+
+            exportMode = e_exportMode.move;
+
+            //! Easies selection of dirs
+
+            global.original = @"D:\Temp\Demos\Filesystem\SubFolderA";
+            global.search = @"D:\Temp\Demos\Filesystem\SubFolderB";
+            global.destination = @"D:\Temp\Demos\Filesystem\SubFolderC";
+
+            /* ! GET CONSOLE OUTPUT WINDOW
+             *
+             * https://stackoverflow.com/questions/4362111/how-do-i-show-a-console-output-window-in-a-forms-application
+             */
         }
 
-        private async void exportFiles()
+        private void exportFiles()
         {
             // todo Development shortcuts, start with only folder searches, implements certain files lates
-
-
         }
 
         private void FldFindOriginalBtn_Click(object sender, EventArgs e)
         {
             DialogResult r = originalFolderDlg.ShowDialog();
+            // global.original = originalFolderDlg.SelectedPath;
+            global.original = @"D:\Temp\Demos\Filesystem\SubFolderA";
             lblogFldPath.Text = originalFolderDlg.SelectedPath;
         }
 
         private void FldFindSearchBtn_Click(object sender, EventArgs e)
         {
             DialogResult r = searchFolderDlg.ShowDialog();
+            //global.search = searchFolderDlg.SelectedPath;
+            global.search = @"D:\Temp\Demos\Filesystem\SubFolderB";
             lblsrchFldPath.Text = searchFolderDlg.SelectedPath;
         }
-
-       
 
         private void FldFindDestinationBtn_Click(object sender, EventArgs e)
         {
             DialogResult r = destinationFolderDlg.ShowDialog();
+            //global.destination = destinationFolderDlg.SelectedPath;
+            global.destination = @"D:\Temp\Demos\Filesystem\SubFolderC";
             lbldsFldPath.Text = destinationFolderDlg.SelectedPath;
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            doFunctionOfEverything();
+        }
+
+        // Dev F1 function
+        private void btnF1_Click(object sender, EventArgs e)
+        {
+            IDictionary<string, List<string>> fileDictionary = new Dictionary<string, List<string>>();
+            fileDictionary["a"] = new List<string> { @"C:/temp/dev", @"C:/temp/pngs" };
+            List<string> pathA = fileDictionary["a"];
+            pathA.Add(@"C:/noMapper");
+            fileDictionary["a"].Add(@"C:/noMapper");
+            foreach(List<string> value in fileDictionary.Values)
+            {
+                value.ForEach(Console.WriteLine);
+            }
+            /*
+            List<string> pathB = fileDictionary["b"];
+            pathB.Add(@"C:/BPath");
+            */
+            try
+            {
+                fileDictionary["b"].Add(@"C:/BPath");
+            } catch(Exception)
+            {
+                fileDictionary["b"] = new List<string> { @"C:/BPath" };
+            }
+            Console.WriteLine("============================================");
+            foreach(List<string> value in fileDictionary.Values)
+            {
+                value.ForEach(Console.WriteLine);
+            }
+        }
+
+        /*
+         foreach(var item in myDictionary)
+            {
+            foo(item.Key);
+            bar(item.Value);
+            }
+        */
+
+        private void doFunctionOfEverything()
+        {
+            try
+            {
+                // todo get dir not more
+                //var filesDestination = Directory.GetFiles(global.destination, "*.*", SearchOption.AllDirectories);
+                // ? Array filesOrigPath = Directory.GetFiles(global.original, "*.*", SearchOption.AllDirectories);
+                // ? Array filesSearchPath = Directory.GetFiles(global.search, "*.*", SearchOption.AllDirectories);
+                // Todo: compare file names, then use the common list index to and move files
+                // TODO: on move, option to make dirs based on extentions
+                // Todo: dupplicate protection -- just add extention like file_0.jpg, file_1.jpg ...
+
+                // public IDictionary<string, FileObject> fileDictionary = new Dictionary<string, FileObject>();
+
+                //global.fileDictionary.Add(files)
+                //! EVERY KEY (AND VALUE?) TO LOWECASE
+                /*  foreach(string file in Directory.GetFiles(global.original, "*.*", SearchOption.AllDirectories))
+                  {
+                      //global.filenamesOriginal.Add(Path.GetFileName(file));
+                      List<string> filePaths = new List<string>();
+                      filePaths.Add(file);
+
+                      global.fileDictionary[Path.GetFileNameWithoutExtension(file)] = filePaths;
+                  }
+                  //  global.filenamesOriginal.ForEach(Console.WriteLine);
+                  try
+                  {
+                      foreach(string file in Directory.GetFiles(global.search, "*.*", SearchOption.AllDirectories))
+                      {
+                          List<string> filePaths = global.fileDictionary[Path.GetFileNameWithoutExtension(file)];
+                          filePaths.Add(Path.GetFullPath(file));
+                      }
+                  } catch(Exception e)
+                  {
+                      // do stuff
+                  }*/
+
+                // ignore default values! and argument orders!
+                addFilesToDictionary(path: global.original, searchOption: SearchOption.TopDirectoryOnly);
+                addFilesToDictionary(path: global.search, searchOption: SearchOption.TopDirectoryOnly);
+
+                foreach(List<string> value in global.fileDictionary.Values)
+                {
+                    value.ForEach(Console.WriteLine);
+                }
+                Console.WriteLine("==================================");
+                foreach(var value in global.fileDictionary)
+                {
+                    Console.WriteLine(value);
+                }
+                Console.WriteLine("==================================");
+                global.fileDictionary["A (1)"].ForEach(Console.WriteLine);
+                // ? Console outputs --remove
+                //global.filenamesOriginal.ForEach(Console.WriteLine);
+                //global.filenamesSearch.ForEach(Console.WriteLine);
+
+                //var CommonList = global.filenamesOriginal.Intersect(Path.GetFileName(global.fullpathsSearch));
+
+                // ? Console Outputs --remove
+                System.Diagnostics.Debug.WriteLine(" ");
+                System.Diagnostics.Debug.WriteLine("-- Common values --");
+
+                //foreach(var item in CommonList)
+                //{
+                //    System.Diagnostics.Debug.WriteLine(item.ToString());
+                //}
+            } catch(Exception e)
+            {
+                throw;
+            }
+        }
+
+        private void addFilesToDictionary(string path, string filter = "*.*", SearchOption searchOption = SearchOption.AllDirectories)
+        {
+            try
+            {
+                Console.WriteLine($"===== Running '{path}' =====");
+                foreach(string file in Directory.GetFiles(path, filter, searchOption))
+                {
+                    try
+                    {
+                        // Adds path to dictionary
+                        global.fileDictionary[Path.GetFileNameWithoutExtension(file)].Add(Path.GetFullPath(file));
+                        Console.WriteLine("-- 1");
+                    } catch(KeyNotFoundException)
+                    {
+                        // If key does not exist, add key
+                        global.fileDictionary[Path.GetFileNameWithoutExtension(file)] = new List<string> { Path.GetFullPath(file) };
+                        Console.WriteLine("-- 0");
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    
+                    //List<string> filePaths = new List<string>();
+                    //global.fileDictionary[Path.GetFileNameWithoutExtension(file)] = filePaths;
+                    //filePaths.Add(file);
+                }
+                Console.WriteLine($"===== END OF {path} =====");
+                
+            } catch(Exception)
+            {
+                throw;
+            }
         }
     }
 }
