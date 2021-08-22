@@ -121,8 +121,8 @@ namespace FileMates
 
         private void doFunctionOfEverything()
         {
-            try
-            {
+           /* try
+            {*/
                 // todo get dir not more
                 //var filesDestination = Directory.GetFiles(global.destination, "*.*", SearchOption.AllDirectories);
                 // ? Array filesOrigPath = Directory.GetFiles(global.original, "*.*", SearchOption.AllDirectories);
@@ -159,17 +159,21 @@ namespace FileMates
                 // ignore default values! and argument orders!
                 addFilesToDictionary(path: global.original, searchOption: SearchOption.TopDirectoryOnly);
                 addFilesToDictionary(path: global.search, searchOption: SearchOption.TopDirectoryOnly);
+            Console.WriteLine("==================================");
 
-                foreach(List<string> value in global.fileDictionary.Values)
+            foreach(List<string> value in global.fileDictionary.Values)
                 {
                     value.ForEach(Console.WriteLine);
                 }
                 Console.WriteLine("==================================");
                 foreach(var value in global.fileDictionary)
                 {
-                    Console.WriteLine(value);
+                    Console.WriteLine("--"+value.Key);
+                value.Value.ForEach(Console.WriteLine);
                 }
                 Console.WriteLine("==================================");
+
+            //? Test of exstracting a specific element --remove
                 global.fileDictionary["A (1)"].ForEach(Console.WriteLine);
                 // ? Console outputs --remove
                 //global.filenamesOriginal.ForEach(Console.WriteLine);
@@ -177,25 +181,23 @@ namespace FileMates
 
                 //var CommonList = global.filenamesOriginal.Intersect(Path.GetFileName(global.fullpathsSearch));
 
-                // ? Console Outputs --remove
-                System.Diagnostics.Debug.WriteLine(" ");
-                System.Diagnostics.Debug.WriteLine("-- Common values --");
 
-                //foreach(var item in CommonList)
-                //{
-                //    System.Diagnostics.Debug.WriteLine(item.ToString());
-                //}
-            } catch(Exception e)
+            /* TODO:
+             * 
+             * Check if path exist (promt to create it, change destination or cancel process), this should ideally be done before files searches due to efficency
+             * Move / copy files, option for sorting based on exctentions
+
+         /*   } catch(Exception e)
             {
                 throw;
-            }
+            }*/
         }
 
         private void addFilesToDictionary(string path, string filter = "*.*", SearchOption searchOption = SearchOption.AllDirectories)
         {
-            try
-            {
-                Console.WriteLine($"===== Running '{path}' =====");
+            //try
+            //{
+                Console.WriteLine($"===== START OF '{path}' =====");
                 foreach(string file in Directory.GetFiles(path, filter, searchOption))
                 {
                     try
@@ -217,12 +219,53 @@ namespace FileMates
                     //global.fileDictionary[Path.GetFileNameWithoutExtension(file)] = filePaths;
                     //filePaths.Add(file);
                 }
-                Console.WriteLine($"===== END OF {path} =====");
+                Console.WriteLine("===== END OF =====", path);
                 
-            } catch(Exception)
+           /* } catch(Exception)
             {
                 throw;
+            }*/
+        }
+
+        private void extractFiles(/*move or copy?*/)
+        {
+
+        }
+        public string EvenColumns(int desiredWidth, IEnumerable<IEnumerable<string>> lists)
+        {
+            return string.Join(Environment.NewLine, EvenColumns(desiredWidth, true, lists));
+        }
+
+        public IEnumerable<string> EvenColumns(int desiredWidth, bool rightOrLeft, IEnumerable<IEnumerable<string>> lists)
+        {
+            return lists.Select(o => EvenColumns(desiredWidth, rightOrLeft, o.ToArray()));
+        }
+
+        public string EvenColumns(int desiredWidth, bool rightOrLeftAlignment, string[] list, bool fitToItems = false)
+        {
+            // right alignment needs "-X" 'width' vs left alignment which is just "X" in the `string.Format` format string
+            int columnWidth = (rightOrLeftAlignment ? -1 : 1) *
+                                // fit to actual items? this could screw up "evenness" if
+                                // one column is longer than the others
+                                // and you use this with multiple rows
+                                (fitToItems
+                                    ? Math.Max(desiredWidth, list.Select(o => o.Length).Max())
+                                    : desiredWidth
+                                );
+
+            // make columns for all but the "last" (or first) one
+            string format = string.Concat(Enumerable.Range(rightOrLeftAlignment ? 0 : 1, list.Length - 1).Select(i => string.Format("{{{0},{1}}}", i, columnWidth)));
+
+            // then add the "last" one without Alignment
+            if(rightOrLeftAlignment)
+            {
+                format += "{" + (list.Length - 1) + "}";
+            } else
+            {
+                format = "{0}" + format;
             }
+
+            return string.Format(format, list);
         }
     }
 }
