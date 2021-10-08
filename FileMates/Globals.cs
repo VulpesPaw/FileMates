@@ -10,7 +10,7 @@ namespace FileMates
     internal class Globals: FileObject
     {
         // paths
-        public string original, search, destination;
+        public string originalPath, searchPath, destinationPath;
 
         // not in use
         /*
@@ -23,6 +23,7 @@ namespace FileMates
         //? -- old
         //public IDictionary<string, FileObject> fileDictionary = new Dictionary<string, FileObject>(); 
         
+        //? Dictionary <FILENAME, LIST_OF_FILE_PATHS> ... = new Dictionary<...>
         public IDictionary<string, List<string>> fileDictionary = new Dictionary<string, List<string>>();
     }
 }

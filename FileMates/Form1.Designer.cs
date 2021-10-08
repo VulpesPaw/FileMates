@@ -44,15 +44,16 @@ namespace FileMates
             this.lblsrchFldPath = new System.Windows.Forms.Label();
             this.lbldsFldPath = new System.Windows.Forms.Label();
             this.btnF1 = new System.Windows.Forms.Button();
+            this.btnMoveFiles = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(607, 512);
+            this.btnRun.Location = new System.Drawing.Point(568, 385);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 23);
             this.btnRun.TabIndex = 0;
-            this.btnRun.Text = "Run";
+            this.btnRun.Text = "Run - Test";
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
@@ -154,11 +155,22 @@ namespace FileMates
             this.btnF1.UseVisualStyleBackColor = true;
             this.btnF1.Click += new System.EventHandler(this.btnF1_Click);
             // 
+            // btnMoveFiles
+            // 
+            this.btnMoveFiles.Location = new System.Drawing.Point(582, 493);
+            this.btnMoveFiles.Name = "btnMoveFiles";
+            this.btnMoveFiles.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveFiles.TabIndex = 7;
+            this.btnMoveFiles.Text = "Move Files";
+            this.btnMoveFiles.UseVisualStyleBackColor = true;
+            this.btnMoveFiles.Click += new System.EventHandler(this.btnMoveFiles_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 547);
+            this.Controls.Add(this.btnMoveFiles);
             this.Controls.Add(this.btnF1);
             this.Controls.Add(this.lbldsFldPath);
             this.Controls.Add(this.lblsrchFldPath);
@@ -194,6 +206,7 @@ namespace FileMates
         private System.Windows.Forms.Label lblsrchFldPath;
         private System.Windows.Forms.Label lbldsFldPath;
         private System.Windows.Forms.Button btnF1;
+        private System.Windows.Forms.Button btnMoveFiles;
     }
 }
 
