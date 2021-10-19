@@ -7,8 +7,9 @@ using System.Windows.Forms;
 
 namespace FileMates
 {
-    internal class Globals: FileObject
+    internal class Globals
     {
+        //! CREATE A CONSTRUCTOR AND PROPERTIES // prop tab tab
         // paths
         public string originalPath, searchPath, destinationPath;
 
@@ -21,9 +22,9 @@ namespace FileMates
         */
         // Add filename as key and all paths in list
         //? -- old
-        //public IDictionary<string, FileObject> fileDictionary = new Dictionary<string, FileObject>(); 
+        //public IDictionary<string, FilePath> fileDictionary2 = new Dictionary<string, FilePath>(); 
         
         //? Dictionary <FILENAME, LIST_OF_FILE_PATHS> ... = new Dictionary<...>
-        public IDictionary<string, List<string>> fileDictionary = new Dictionary<string, List<string>>();
+       public IDictionary<string, List<FilePath>> fileDictionary = new Dictionary<string, List<FilePath>>();
     }
 }
