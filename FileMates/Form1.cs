@@ -41,12 +41,12 @@ namespace FileMates
      *//* 
      * Could have
      * 
-     * 
+     * https://stackoverflow.com/questions/1970514/populate-a-treeview-with-a-string-directory
+     * THIS IS NOT A PRIORITY, START BY MAKING A DECENT UI, FANCY PANTSY LONG STUFF CAN COME LATER
      * - Better file selector interface, because its not looking good, a first lead could be following
      * https://www.youtube.com/watch?v=oRtME1oJD7M
      * https://www.youtube.com/watch?v=uRhXrxvnTus
      * https://www.youtube.com/watch?v=6OwyNiLPDNw
-     * 
      *//* 
      * Won't have
      * 
