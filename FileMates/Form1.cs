@@ -20,6 +20,38 @@ namespace FileMates
     // TODO: on move, option to make dirs based on extentions
     // Todo: dupplicate protection -- just add extention like file_0.jpg, file_1.jpg ...
     // Todo: When finished, put on an apropriate linscense, like 'Unlincenced'
+    /* TODO § ----- §
+     * Select layer deaths, (note, don't allow multilayers, or displat a warning when selecting a letter, like C:, or D:. 
+     Lots of files that would be in need of searching and sorting through)
+     * Add work moving in a task
+     * Add Dir search in a path. What if there are A LOT of files?
+     * 
+     * 
+     */
+
+    // todo MoSCoW - Must have, Should have, Could have, Won't have
+    /* 
+     * Must Have
+     * - done
+     * 
+     *//* 
+     * Should have
+     * - Better, Frendlier UI
+     * 
+     *//* 
+     * Could have
+     * 
+     * 
+     * - Better file selector interface, because its not looking good, a first lead could be following
+     * https://www.youtube.com/watch?v=oRtME1oJD7M
+     * https://www.youtube.com/watch?v=uRhXrxvnTus
+     * https://www.youtube.com/watch?v=6OwyNiLPDNw
+     * 
+     *//* 
+     * Won't have
+     * 
+     */
+
 
     // ? Reference project; TutorialHaven  - ConsoleUI
     public partial class Form1 : Form
@@ -44,14 +76,14 @@ namespace FileMates
              * ------ */
 
             exportMode = e_exportMode.move;
-
+            /* x
             //! Easier selection of directoies
 
             global.originalPath = @"D:\Temp\Demos\Filesystem\SubFolderA";
             global.searchPath = @"D:\Temp\Demos\Filesystem\SubFolderB";
             global.destinationPath = @"D:\Temp\Demos\Filesystem\SubFolderC\C";
-
-            /* ! GET CONSOLE OUTPUT WINDOW
+            */
+            /* ? GET CONSOLE OUTPUT WINDOW
              *
              * https://stackoverflow.com/questions/4362111/how-do-i-show-a-console-output-window-in-a-forms-application
              */
@@ -64,31 +96,54 @@ namespace FileMates
 
         private void FldFindOriginalBtn_Click(object sender, EventArgs e)
         {
-            // todo create lists for file locations
-
             DialogResult r = originalFolderDlg.ShowDialog();
-            // global.original = originalFolderDlg.SelectedPath;
-            //! Develop shortcut
-            global.originalPath = @"D:\Temp\Demos\Filesystem\SubFolderA";
-            lblogFldPath.Text = originalFolderDlg.SelectedPath;
+            if(r == DialogResult.OK)
+            {
+                global.originalPath = originalFolderDlg.SelectedPath;
+                //x! Develop shortcut
+                //xglobal.originalPath = @"D:\Temp\Demos\Filesystem\SubFolderA";
+                lblogFldPath.Text = originalFolderDlg.SelectedPath;
+            }
+
+                this.treeView1.Nodes.Add(TraverseDirectory(global.originalPath));
+
+
+
+        }
+
+        private TreeNode TraverseDirectory(string path)
+        {
+            TreeNode result = new TreeNode(path);
+            foreach(var subdirectory in Directory.GetDirectories(path))
+            {
+                result.Nodes.Add(TraverseDirectory(subdirectory));
+            }
+
+            return result;
         }
 
         private void FldFindSearchBtn_Click(object sender, EventArgs e)
         {
             DialogResult r = searchFolderDlg.ShowDialog();
-            //global.search = searchFolderDlg.SelectedPath;
-            //! Develop shortcut
-            global.searchPath = @"D:\Temp\Demos\Filesystem\SubFolderB";
-            lblsrchFldPath.Text = searchFolderDlg.SelectedPath;
+            if(r == DialogResult.OK)
+            {
+                global.searchPath = searchFolderDlg.SelectedPath;
+                //x! Develop shortcut
+                //xglobal.searchPath = @"D:\Temp\Demos\Filesystem\SubFolderB";
+                lblsrchFldPath.Text = searchFolderDlg.SelectedPath;
+            }
         }
 
         private void FldFindDestinationBtn_Click(object sender, EventArgs e)
         {
             DialogResult r = destinationFolderDlg.ShowDialog();
-            //global.destination = destinationFolderDlg.SelectedPath;
-            //! Develop shortcut
-            global.destinationPath = @"D:\Temp\Demos\Filesystem\SubFolderC\C";
-            lbldsFldPath.Text = destinationFolderDlg.SelectedPath;
+            if(r == DialogResult.OK)
+            {
+                global.destinationPath = destinationFolderDlg.SelectedPath;
+                //x! Develop shortcut
+                //xglobal.destinationPath = @"D:\Temp\Demos\Filesystem\SubFolderC\C";
+                lbldsFldPath.Text = destinationFolderDlg.SelectedPath;
+            }
         }
 
         /*
@@ -98,11 +153,6 @@ namespace FileMates
             bar(item.Value);
             }
         */
-
-        private void btnRun_Click(object sender, EventArgs e)
-        {
-            doFunctionOfEverything();
-        }
 
         // ? Will move files
         private void btnMoveFiles_Click(object sender, EventArgs e)
@@ -182,9 +232,8 @@ namespace FileMates
 
                     foreach(FilePath filePath in kvp.Value)
                     {
-
                         if(kvp.Value.Count >= 2)
-                        File.Move(filePath.FullFilePath, $@"{global.destinationPath}\{filePath.FilenameWithExtention}");
+                            File.Move(filePath.FullFilePath, $@"{global.destinationPath}\{filePath.FilenameWithExtention}");
                     }
                 }
             } catch(Exception e)
@@ -208,13 +257,12 @@ namespace FileMates
             // Adds files and file paths to a dictionary
             foreach(string file in Directory.GetFiles(path, filter, searchOption))
             {
-               try
+                try
                 {
                     Console.WriteLine($"\t\t File --> {file} ");
                     // Adds file path properties to filePath
                     // Adds path to dictionary
                     FilePath filePath = new FilePath(Path.GetFullPath(file), Path.GetFileName(file));
-
 
                     // List.Add(file objs)
                     global.fileDictionary[Path.GetFileNameWithoutExtension(file)].Add(filePath);
@@ -236,7 +284,7 @@ namespace FileMates
                 {
                     Console.WriteLine(e);
                 }
-                
+
                 //List<string> filePaths = new List<string>();
                 //global.fileDictionary[Path.GetFileNameWithoutExtension(file)] = filePaths;
                 //filePaths.Add(file);
@@ -244,8 +292,8 @@ namespace FileMates
             Console.WriteLine("\n\r===== END OF {0} ====\n\r", path);
 
             /* Console -----
-             * 
-             * 
+             *
+             *
              *    File: B (3)
              *
              *            Filenames:        // emptey
@@ -270,7 +318,6 @@ namespace FileMates
                     Console.WriteLine("\n\r");
                 }
             }
-
         }
 
         /* ? ========== ENVEN COLUMNS ========= */
@@ -313,106 +360,32 @@ namespace FileMates
             return string.Format(format, list);
         }
 
-        /* ! ======== REMVOVE DEV-CODE BELLOW ========*/
-
-        // Dev F1 function
-        private void btnF1_Click(object sender, EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e)
         {
-            IDictionary<string, List<string>> fileDictionary = new Dictionary<string, List<string>>();
-
-            fileDictionary["a"] = new List<string> { @"C:/temp/dev", @"C:/temp/pngs" };
-            List<string> pathA = fileDictionary["a"];
-            pathA.Add(@"C:/noMapper");
-            fileDictionary["a"].Add(@"C:/noMapper");
-            foreach(List<string> value in fileDictionary.Values)
+            using(FolderBrowserDialog fbd = new FolderBrowserDialog() { Description="Select your path." })
             {
-                value.ForEach(Console.WriteLine);
-            }
-            /*
-            List<string> pathB = fileDictionary["b"];
-            pathB.Add(@"C:/BPath");
-            */
-            try
-            {
-                fileDictionary["b"].Add(@"C:/BPath");
-            } catch(Exception)
-            {
-                fileDictionary["b"] = new List<string> { @"C:/BPath" };
-            }
-            Console.WriteLine("============================================");
-            foreach(List<string> value in fileDictionary.Values)
-            {
-                value.ForEach(Console.WriteLine);
+                if(fbd.ShowDialog() == DialogResult.OK)
+                {
+                    webBrowser.Url = new Uri(fbd.SelectedPath);
+                    tbxPath.Text = fbd.SelectedPath;
+                }
             }
         }
 
-        private void doFunctionOfEverything()
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            /* try
-             {*/
-
-            // public IDictionary<string, FileObject> fileDictionary = new Dictionary<string, FileObject>();
-
-            //global.fileDictionary.Add(files)
-            //! EVERY KEY (AND VALUE?) TO LOWECASE
-            /*  foreach(string file in Directory.GetFiles(global.original, "*.*", SearchOption.AllDirectories))
-              {
-                  //global.filenamesOriginal.Add(Path.GetFileName(file));
-                  List<string> filePaths = new List<string>();
-                  filePaths.Add(file);
-
-                  global.fileDictionary[Path.GetFileNameWithoutExtension(file)] = filePaths;
-              }
-              //  global.filenamesOriginal.ForEach(Console.WriteLine);
-              try
-              {
-                  foreach(string file in Directory.GetFiles(global.search, "*.*", SearchOption.AllDirectories))
-                  {
-                      List<string> filePaths = global.fileDictionary[Path.GetFileNameWithoutExtension(file)];
-                      filePaths.Add(Path.GetFullPath(file));
-                  }
-              } catch(Exception e)
-              {
-                  // do stuff
-              }*/
-
-            // ignore default values! and argument orders!
-            addFilesToDictionary(path: global.originalPath, searchOption: SearchOption.TopDirectoryOnly);
-            addFilesToDictionary(path: global.searchPath, searchOption: SearchOption.TopDirectoryOnly);
-            // Console.WriteLine("==================================");
-
-            //? Prining result
-            /*
-            foreach(List<string> value in global.fileDictionary.Values)
-                {
-                    value.ForEach(Console.WriteLine);
-                }
-                Console.WriteLine("==================================");
-                foreach(var value in global.fileDictionary)
-                {
-                    Console.WriteLine("--"+value.Key);
-                value.Value.ForEach(Console.WriteLine);
-                }
-                Console.WriteLine("==================================");
-            */
-            //? Test of exstracting a specific element --remove
-            // Console.WriteLine("\n\r Extraction testing \n\r");
-            //   global.fileDictionary["A (1)"].ForEach(Console.WriteLine);
-            // ? Console outputs --remove
-            //global.filenamesOriginal.ForEach(Console.WriteLine);
-            //global.filenamesSearch.ForEach(Console.WriteLine);
-
-            //var CommonList = global.filenamesOriginal.Intersect(Path.GetFileName(global.fullpathsSearch));
-
-            /* TODO:
-             *
-             * Check if path exist (promt to create it, change destination or cancel process), this should ideally be done before files searches due to efficency
-             * Move / copy files, option for sorting based on exctentions
-
-         /*   } catch(Exception e)
+            if(webBrowser.CanGoBack)
             {
-                throw;
-            }*/
+                webBrowser.GoBack();
+            }
+        }
+
+        private void btnForward_Click(object sender, EventArgs e)
+        {
+            if(webBrowser.CanGoForward)
+            {
+                webBrowser.GoForward();
+            }
         }
     }
 }
