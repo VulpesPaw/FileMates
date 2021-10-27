@@ -105,7 +105,6 @@ namespace FileMates
                 lblogFldPath.Text = originalFolderDlg.SelectedPath;
             }
 
-                this.treeView1.Nodes.Add(TraverseDirectory(global.originalPath));
 
 
 
@@ -360,32 +359,5 @@ namespace FileMates
             return string.Format(format, list);
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
-        {
-            using(FolderBrowserDialog fbd = new FolderBrowserDialog() { Description="Select your path." })
-            {
-                if(fbd.ShowDialog() == DialogResult.OK)
-                {
-                    webBrowser.Url = new Uri(fbd.SelectedPath);
-                    tbxPath.Text = fbd.SelectedPath;
-                }
-            }
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            if(webBrowser.CanGoBack)
-            {
-                webBrowser.GoBack();
-            }
-        }
-
-        private void btnForward_Click(object sender, EventArgs e)
-        {
-            if(webBrowser.CanGoForward)
-            {
-                webBrowser.GoForward();
-            }
-        }
     }
 }

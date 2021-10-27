@@ -8,3 +8,13 @@ C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.csproj.CoreC
 C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.exe
 C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.pdb
 C:\Users\richa\source\repos\FileMates\FileMates\obj\Debug\FileMates.csproj.AssemblyReference.cache
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\bin\Debug\FileMates.exe.config
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\bin\Debug\FileMates.exe
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\bin\Debug\FileMates.pdb
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.csproj.AssemblyReference.cache
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.Form1.resources
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.Properties.Resources.resources
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.csproj.GenerateResource.cache
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.csproj.CoreCompileInputs.cache
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.exe
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.pdb
