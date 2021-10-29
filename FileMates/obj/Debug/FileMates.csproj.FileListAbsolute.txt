@@ -18,3 +18,5 @@ C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.cspro
 C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.csproj.CoreCompileInputs.cache
 C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.exe
 C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.pdb
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.TemporaryCopy.resources
+C:\Users\HK\source\repos\FileMates\FileMates\FileMates\obj\Debug\FileMates.DesignTry.resources

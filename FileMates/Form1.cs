@@ -70,7 +70,13 @@ namespace FileMates
             // Fix self-ish updateing
             // https://www.youtube.com/watch?v=9mUuJIKq40M
             // Select mutliple files with File Dialog: https://stackoverflow.com/a/12909759
-            InitializeComponent();
+
+
+            //! UNCOMMENT THIS WHEN USING NORMAL FORM1
+            //! InitializeComponent();
+
+            DesignTry designTry = new DesignTry();
+            designTry.ShowDialog();
 
             /* ! DEVELOPMENT SHORTCUTS
              * ------ */
